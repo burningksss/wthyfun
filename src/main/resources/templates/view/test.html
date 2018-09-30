@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <![endif]-->
+    <title>天易软件</title>
+    <!-- BOOTSTRAP CORE STYLE  -->
+    <link href="${ctxPath}/static/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME ICONS  -->
+    <link href="${ctxPath}/static/assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE  -->
+    <link href="${ctxPath}/static/assets/css/style.css" rel="stylesheet" />
+    <!-- HTML5 Shiv and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style >
+        li{
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .menu-section{
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+<%var user=shiro.getUser();%>
+<div class="navbar navbar-inverse set-radius-zero">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="row" style="margin-top: 10px;margin-left: -25px;color: #fff;">
+                <span style="font-size: 23px;font-family: 'NSimSun'">智达天辉项目管理系统</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- LOGO HEADER END-->
+
+<section class="menu-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-7">
+                <div class="navbar-collapse collapse ">
+                    <ul id="menu-top" class="nav navbar-nav navbar-right">
+                        <li><a href="${ctxPath}/menu/toIndex">我的地盘</a></li>
+                        <li><a href="${ctxPath}/menu/toProduct">产品</a></li>
+                        <li><a href="${ctxPath}/menu/toProject">项目</a></li>
+                        <li><a class="menu-top-active" href="${ctxPath}/menu/toTest">测试</a></li>
+                        <li><a href="${ctxPath}/menu/toDocument">文档</a></li>
+                        <li><a href="${ctxPath}/menu/toStat">统计</a></li>
+                        <li><a href="${ctxPath}/menu/toOrg">组织</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2" style="margin-top: 6px;text-align: right;">
+                <span>欢迎您，${user.username}</span>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- MENU SECTION END-->
+
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="panel-body">
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="#home-pills" data-toggle="tab">bug</a>
+                    </li>
+                    <li class=""><a href="#profile-pills" data-toggle="tab">用例</a>
+                    </li>
+                    <li class=""><a href="#messages-pills" data-toggle="tab">测试单</a>
+                    </li>
+                    <li class=""><a href="#settings-pills" data-toggle="tab">套件</a>
+                    </li>
+                    <li class=""><a href="#settings-pills" data-toggle="tab">报告</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+<!-- CONTENT-WRAPPER SECTION END-->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="text-align: center;">
+                &copy; 2018 scdz | By : <a href="http://www.designbootstrap.com/" target="_blank">wt</a>
+            </div>
+
+        </div>
+    </div>
+</footer>
+<!-- FOOTER SECTION END-->
+<!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+<!-- CORE JQUERY SCRIPTS -->
+<script src="${ctxPath}/static/assets/js/jquery-1.11.1.js"></script>
+<!-- BOOTSTRAP SCRIPTS  -->
+<script src="${ctxPath}/static/assets/js/bootstrap.js"></script>
+</body>
+</html>
