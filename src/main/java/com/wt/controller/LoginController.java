@@ -40,7 +40,7 @@ public class LoginController {
     public String logOut(HttpSession session) {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-//        session.removeAttribute("user");
+        session.removeAttribute("user");
         return "login";
     }
 }

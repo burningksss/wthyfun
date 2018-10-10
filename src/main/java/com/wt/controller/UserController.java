@@ -29,7 +29,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/getAllUser")
-    public User getAllUser(){
-        return userService.findByUserName("xyycici");
+    public List<User> getAllUser(){
+        return userService.findAllUser();
     }
 }
