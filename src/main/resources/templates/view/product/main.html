@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-8">
+        <div class="row" style="margin-top: 20px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                   产品统计
+                </div>
+
+                <div class="panel-body">
+                    <div class="col-md-3">
+                        <div class="btn-group-vertical" role="group" aria-label="...">
+                           <button class="btn btn-default" style="width:150px;">政策法规</button>
+                            <button class="btn btn-default" style="width:150px;">省平台</button>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="jumbotron" style="padding-top: 10px;">
+
+                            <h3 style="text-align: center;">总需求:0</h3>
+
+
+                          <table class="table">
+                              <thead>
+                              <th>未开始</th>
+                              <th>已计划</th>
+                              <th>研发中</th>
+                              <th>测试中</th>
+                              <th>已发布</th>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                  <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+                              </tr>
+                              </tbody>
+                          </table>
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                   未关闭的产品
+                </div>
+
+                <div class="panel-body">
+                    <table id="tb_departments" class="table table-striped"></table>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row"style="margin-top: 20px;margin-left: 10px;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                   产品总览
+                </div>
+
+                <div class="panel-body"style="text-align:center;">
+                   <div id="cpzl" style="width: 200px;height: 200px;margin:0 auto;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+    </div>
+</body>
+<script src="${ctxPath}/static/assets/js/echarts.js"></script>
+<script>
+    $(function () {
+
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+
+        var echartInit=new EchartInit();
+        echartInit.init();
+    });
+
+
+    var TableInit = function () {
+        var oTableInit = new Object();
+        //初始化Table
+        oTableInit.Init = function () {
+            $('#tb_departments').bootstrapTable({
+                url: '${ctxPath}/user/getAllUser',         //请求后台的URL（*）
+                method: 'post',                      //请求方式（*）
+                //toolbar: '#toolbar',                //工具按钮用哪个容器
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                //pagination: true,                   //是否显示分页（*）
+                sortable: false,                     //是否启用排序
+                sortOrder: "asc",                   //排序方式
+                //queryParams: oTableInit.queryParams,//传递参数（*）
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 10,                       //每页的记录行数（*）
+                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                //search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                //strictSearch: true,
+                //showColumns: true,                  //是否显示所有的列
+                //showRefresh: true,                  //是否显示刷新按钮
+                minimumCountColumns: 2,             //最少允许的列数
+                clickToSelect: true,                //是否启用点击选中行
+                //height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                //showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+               // cardView: false,                    //是否显示详细视图
+                //detailView: false,                   //是否显示父子表
+                columns: [{
+                    checkbox: true
+                }, {
+                    field: 'uid',
+                    title: '编号'
+                }, {
+                    field: 'username',
+                    title: '用户名'
+                }, {
+                    field: 'realname',
+                    title: '真实姓名'
+                }, {
+                    field: 'position',
+                    title: '职位'
+                }, {
+                    field: 'email',
+                    title: '邮箱'
+                }, {
+                    field: 'sex',
+                    title: '性别'
+                }, {
+                    field: 'phone',
+                    title: '电话'
+                }, {
+                    field: 'qq',
+                    title: 'QQ'
+                }, {
+                    field: 'logintime',
+                    title: '最后登录'
+                }, {
+                    field: 'logintimes',
+                    title: '访问次数'
+                }]
+            });
+        };
+
+        return oTableInit;
+    };
+
+    var EchartInit = function(){
+        var oEchartInit=new Object();
+        oEchartInit.init=function(){
+            var myChart=echarts.init(document.getElementById('cpzl'));
+            myChart.setOption(option);
+        };
+        option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'right',
+                data:['正常','结束']
+            },
+            series: [
+                {
+                    name:'产品状态',
+                    type:'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '30',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:[
+                        {value:1, name:'正常'},
+
+                        {value:1, name:'结束'}
+                    ]
+                }
+            ]
+        };
+        return oEchartInit;
+    }
+
+</script>
+</html>
